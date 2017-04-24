@@ -1,16 +1,21 @@
 (function(window){
 
+
 	'use strict';
 	function Spaceship(){
 
 		var _Spaceship = {};
 
+		_Spaceship.spaceshipSettings = {};
+
 		_Spaceship.conn = new WebSocket('ws://localhost:8888');
+
     _Spaceship.conn.onopen = function(e) {
         console.log("Connection established!");
     };
 
     _Spaceship.conn.onmessage = function(e) {
+
 			var sp__chat__box__holder = window.document.createElement("div");
 			sp__chat__box__holder.className = "sp__chat__box__holder";
 			window.document.getElementsByClassName("sp__chat")[0].appendChild(sp__chat__box__holder);
@@ -96,12 +101,18 @@
 			window.document.getElementsByClassName("sp__launcher")[0].appendChild(sp__launcher__img);
 
 			document.getElementsByClassName('sp__send__button')[0].onclick = function(e){
-				_Spaceship.conn.send(document.getElementsByClassName('sp__txt__area')[0].value);
+				_Spaceship.conn.send(JSON.stringify(
+						{
+							app_id: 'APP_ID',
+							user:{
+								id: 'USER_ID'
+							},
+							message : document.getElementsByClassName('sp__txt__area')[0].value
+						}
+					)
+				);
 				document.getElementsByClassName('sp__txt__area')[0].value = "";
-			}
-
-			//console.log(window.document.getElementsByClassName("sp__chat__box__holder").length);
-
+			}			
 		}
 
 		_Spaceship.ahoy = function(){
