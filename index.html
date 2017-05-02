@@ -7,21 +7,17 @@
 </head>
 
 <body>
-
-	<script src="spaceship.js"></script>
 	<script type="text/javascript">
-		var s = Spaceship;
-		s.init();
-
-		s.spaceshipSettings = {
+		window.spaceshipSettings = {
 			app_id: 'APP_ID',
 			user:{
-				id: 'USER_ID'
+				id: 'USER_ID',
+				name: "USER_NAME",
+				email: "USER_EMAIL"
 			}
 		};
-
-		console.log(s.ahoy());
 	</script>
+	<script src="spaceship.js"></script>
 </body>
 
 
